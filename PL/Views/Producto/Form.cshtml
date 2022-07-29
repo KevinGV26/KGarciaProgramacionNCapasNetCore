@@ -1,0 +1,92 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Producto</h2>
+            <h5>Ingrese los datos del producto:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.PrecioUnitario)
+                        @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control", @id = "txtPrecioUnitario" })
+                        @Html.ValidationMessageFor(model => model.PrecioUnitario)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Stock)
+                        @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", @id = "txtStock" })
+                        @Html.ValidationMessageFor(model => model.Stock)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Proveedor.IdProveedor)
+                        @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Nombre"), "Selecciona un Proveedor correspondiente", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Departamento.IdDepartamento)
+                        @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona un departamento correspondiente", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Descripcion)
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", @id = "txtSemestre" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

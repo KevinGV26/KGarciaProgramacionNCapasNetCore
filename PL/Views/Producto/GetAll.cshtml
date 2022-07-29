@@ -1,0 +1,51 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Producto</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un producto para editarlo o + para agregar...</h5>
+        <hr />
+    </div>
+</div>
+
+<div style="float:right;">
+@Html.ActionLink("+", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+<br />
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>
+            <td class="hidden">IdProducto</td>
+            <td>Nombre</td>
+            <td>Precio unitario</td>
+            <td>Stock</td>
+            <td>IdProveedor</td>
+            <td>IdDepartamento</td>
+            <td>Descripcion</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(ML.Producto producto in Model.Productos)
+            {
+                <tr>
+                    <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form","Producto",new {IdProducto =producto.IdProducto})"> </a></td>
+                    <td class="hidden">@producto.IdProducto</td>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.PrecioUnitario</td>
+                    <td>@producto.Stock</td>
+                    @*propiedades de navegacion*@
+                    <td>@producto.Proveedor.IdProveedor</td>
+                    <td>@producto.Departamento.IdDepartamento</td>
+                    <td>@producto.Descripcion</td>
+                    <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto= producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este producto?');"></a></td>
+                </tr>
+            }
+
+    </tbody>
+</table>
