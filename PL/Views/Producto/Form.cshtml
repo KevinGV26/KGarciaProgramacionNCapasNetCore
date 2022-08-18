@@ -3,7 +3,7 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.4.1.js" type="text/javascript"></script>
 <h2>Form</h2>
 <div class="row">
     <div class="container">
@@ -78,15 +78,54 @@
                         @Html.ValidationMessageFor(model => model.Descripcion)
                     </div>
                 </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model=> model.Imagen)
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                        <input type='file' class="form-control" name="fuImage" onchange="readURL(this);" />
+                    </div>
+
+                    @if (Model.Imagen != null)
+                    {
+
+                        <img id="Img" src="data:image/*;base64,Model.Imagen" style="width:auto ; height:100px" />
+                    }
+                    else
+                    {
+                        <img id="Img" src="~/Images/proudcto-sin-producto.jpg"  style="width:auto ; height:100px"/>
+                    }
+                </div>
+                   @Html.HiddenFor(model => model.Imagen)
                 <div class="col">
                     <div class="col-md-3">
                         <input type="submit" value="Guardar" class="btn btn-success" />
                         @Html.ActionLink("Regresar", "GetAll", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
                     </div>
                 </div>
-
             }
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function ()
+        {
+            function readURL(input){
+                if (input.files && input.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#Img')
+                            .attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+        });
+</script>
+}

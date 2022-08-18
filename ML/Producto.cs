@@ -22,8 +22,10 @@ namespace ML
 
         public string? Descripcion { get; set; }
 
-        public byte[]? Imagen { set; get; }
+        public string? Imagen { set; get; }
 
         public List<object>? Productos { set; get; }
+
+
     }
 }

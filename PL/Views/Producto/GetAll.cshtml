@@ -28,6 +28,7 @@
             <td>IdProveedor</td>
             <td>IdDepartamento</td>
             <td>Descripcion</td>
+            <td>Imagen Producto</td>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +44,9 @@
                     <td>@producto.Proveedor.IdProveedor</td>
                     <td>@producto.Departamento.IdDepartamento</td>
                     <td>@producto.Descripcion</td>
+                    <td> <img id="Img" src="data:image/*;base64,@producto.Imagen" style="width:auto ; height:100px" /></td>
                     <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto= producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este producto?');"></a></td>
                 </tr>
             }
-
     </tbody>
 </table>

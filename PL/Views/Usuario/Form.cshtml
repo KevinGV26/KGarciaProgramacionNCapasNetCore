@@ -3,7 +3,17 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*anterior*@
 <script src="~/Scripts/jquery-3.4.1.js" type="text/javascript"></script>
+
+
+@*nuevas*@
+@*<script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery1.6.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery1.8-ui.min.js" type="text/javascript"></script>
+<link href="~/Content/jquery1.8-ui.css" rel="Stylesheet" type="text/css" />
+*@
+
 <h2>Form</h2>
 <div class="row">
     <div class="container">
@@ -27,7 +37,7 @@
             {
 
                 <div class="hidden">
-                    <div hidden>
+                    <div class="col-md-4 col-12 col-sm-6" style="display: none;">
                         @Html.LabelFor(model => model.IdUsuario)
                         @Html.TextBoxFor(model => model.IdUsuario, new { @class = " hidden form-control", @id = "txtIdUsuario" })
                         @Html.ValidationMessageFor(model => model.IdUsuario)
@@ -37,9 +47,9 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Nombre)
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre",onkeypress="return SoloLetras(event, 'lblErrorNombre')" })
                         @Html.ValidationMessageFor(model => model.Nombre)
-
+                        <label id="lblErrorNombre"></label>
                     </div>
                 </div>
 
@@ -47,8 +57,9 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.ApellidoPaterno)
-                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoPaterno')" })
                         @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                        <label id="lblErrorApellidoPaterno"></label>
 
                     </div>
                 </div>
@@ -56,8 +67,9 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.ApellidoMaterno)
-                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoMaterno')" })
                         @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                        <label id="lblErrorApellidoMaterno"></label>
 
                     </div>
                 </div>
@@ -65,10 +77,20 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Email)
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail"})
                         @Html.ValidationMessageFor(model => model.Email)
-
-                    </div>
+                        <label id="lblErrorEmail"></label>
+                   </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <label>Confirmar Email</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input class="form-control" type="text" id="ConfirmarEmail" onblur="return ValidarEmailConfirmacion(event,'lblErrorEmailConfirmation')"/>
+                        </div>
+                        <label id="lblErrorEmailConfirmation"></label>
+                   </div>
                 </div>
 
                 <div class="col">
@@ -88,44 +110,84 @@
                 </div>
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
+                        <label>Confirmar Password</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="ConfirmarPassword" onblur="return ValidarPasswordConfirmacion(event,'lblErrorPasswordConfirmation')"/>
+                        </div>
+                        <label id="lblErrorPasswordConfirmation"></label>
+                   </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
                         @Html.LabelFor(model => model.Sexo)
-                        @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @id = "txtPassword" })
+                        @Html.RadioButtonFor(model => model.Sexo, "M", new { @id = "rbtnSexoM"})
+                        @Html.Label("Masculino")
+                        @Html.RadioButtonFor(model => model.Sexo, "F", new { @id = "rbtnSexoF"})
+                        @Html.Label("Femenino")
                         @Html.ValidationMessageFor(model => model.Sexo)
                     </div>
                 </div>
+@*                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Sexo)
+                        @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @id = "txtSexo" })
+                        @Html.ValidationMessageFor(model => model.Sexo)
+                    </div>
+                </div>*@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Telefono)
-                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtPassword" })
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono",onkeypress="return SoloNumeros(event,'lblErrorTelefono')" })
                         @Html.ValidationMessageFor(model => model.Telefono)
+                        <label id="lblErrorTelefono"></label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Celular)
-                        @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @id = "txtPassword" })
+                        @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @id = "txtCelular",onkeypress="return SoloNumeros(event,'lblErrorCelular')" })
                         @Html.ValidationMessageFor(model => model.Celular)
+                        <label id="lblErrorCelular"></label>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.FechaNacimiento)
-                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechanacimiento" })
+                        @Html.TextBoxFor(model => model.FechaNacimiento, new {@class = "form-control", @id = "txtFechaNacimiento" })
                         @Html.ValidationMessageFor(model => model.FechaNacimiento)
                     </div>
                 </div>
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Curp)
-                        @Html.TextBoxFor(model => model.Curp, new { @class = "form-control", @id = "txtPassword" })
+                        @Html.TextBoxFor(model => model.Curp, new { @class = "form-control", @id = "txtCurp",onblur="return ValidarCurp(event,'lblErrorCurp')" })
                         @Html.ValidationMessageFor(model => model.Curp)
+                        <label id="lblErrorCurp"></label>
                     </div>
                 </div>
+                <div class="col-md-4">
+                   @Html.LabelFor(model=> model.Imagen)
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                        <input type='file' class="form-control" name="fuImage" onchange="readURL(this);" />
+                    </div>
+
+                    @if (Model.Imagen != null)
+                    {
+                        <img id="Img" src="data:image/*;base64,Model.Imagen" style="width:auto ; height:100px" />
+                    }
+                    else
+                    {
+                        <img id="Img" src="~/Images/Foto-sin-foto.jpeg" style="width:auto ; height:100px" />
+                    }
+                </div>
+                    @Html.HiddenFor(model => model.Imagen)
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.UserName)
-                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtPassword" })
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" })
                         @Html.ValidationMessageFor(model => model.UserName)
                     </div>
                 </div>
@@ -139,15 +201,17 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Direccion.NumeroInterior)
-                        @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @id = "txtNumeroInterior" })
+                        @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @id = "txtNumeroInterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroInterior')"})
                         @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior)
+                         <label id="lblErrorNumeroInterior"></label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Direccion.NumeroExterior)
-                        @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @id = "txtNumeroExterior" })
+                        @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @id = "txtNumeroExterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroExterior')" })
                         @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
+                        <label id="lblErrorNumeroExterior"></label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -236,7 +300,6 @@
                     }
                 });
             });
-
             $("#ddlEstado").change(function () {
                 $("#ddlMunicipio").empty();
                 $.ajax({
@@ -257,7 +320,6 @@
                     }
                 });
             });
-
             $("#ddlMunicipio").change(function () {
                 $("#ddlColonia").empty();
                 $.ajax({
@@ -278,7 +340,127 @@
                     }
                 });
             });
-
         });
+       function readURL(input){
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#Img')
+                        .attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+       }
+       function SoloLetras(e, controlId) {
+            var caracter = e.key;
+            if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan letras");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+       }
+       function SoloNumeros(e, controlId) {
+            var caracter = e.key;
+            if (!/^[0-9]*$/g.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan numeros");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+       } 
+       //Para email
+        $('#txtEmail').on('blur',function() {
+            var regex = /[\w-\.]{2,}@@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+            if (!regex.test($('#txtEmail').val().trim())) {
+                //alert('Correo validado');
+
+                $('#txtEmail').css({"border-color":"red"});
+                $("#lblErrorEmail").css({ "color": "red" });
+                //$("#lblErrorEmail").text("Ingrese un correo valido");
+
+            } else {
+                $('#lblErrorEmail').text("Correo correcto"); 
+                $('#txtEmail').css({"border-color":"green"});
+               
+            }
+        });
+        function ValidarCurp(e, controlId) {
+            var regex = /[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/;
+            if (!regex.test($('#txtCurp').val().trim())) {
+                $('#' + controlId).text("Ingrese un CURP Valido");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+        function ValidarEmailConfirmacion(e,controlId)
+        {
+            if ($("#txtEmail").val() != $("#ConfirmarEmail").val()) {
+                $('#txtEmail').css({"boder-color":"red"});
+                $('#ConfirmarEmail').css({"color":"red"});
+                $('#' + controlId).text("Los correos no coinciden");
+                return false;
+
+            }
+            else{
+
+                $('#txtEmail').css({"border-color":"green"});
+                $('#ConfirmarEmail').css({"color":"green"});
+                $('#' + controlId).css({ "color": "green" });
+                $('#' + controlId).text("Los correos coinciden");
+
+                return false;
+            }
+
+        }
+        function ValidarPasswordConfirmacion(e,controlId)
+        {
+            if ($("#txtPassword").val() != $("#ConfirmarPassword").val()) {
+                $('#txtPassword').css({"boder-color":"red"});
+                $('#ConfirmarPassword').css({"color":"red"});
+                $('#' + controlId).text("Los contrasenas no coinciden");
+                return false;
+
+            }
+            else{
+
+                $('#txtPassword').css({"border-color":"green"});
+                $('#ConfirmarPassword').css({"color":"green"});
+                $('#' + controlId).css({ "color": "green" });
+                $('#' + controlId).text("Las contrasenas coinciden");
+
+                return false;
+            }
+
+        }
+
+        //var j = jQuery.noConflict();
+
+        //j(function() {
+        //    j("#txtFechaNacimiento").datepicker({
+        //        dateFormat: 'mm-dd-yy',
+        //        //showOn: 'button',
+        //        //buttonImage: "../../Img/calendar.png",
+        //        //buttonImageOnly: true,
+        //        changeMonth: true,
+        //        changeYear: true
+        //    });
+        //    $(".ui-datepicker-trigger").css("width", "30px");
+        //    $(".ui-datepicker-trigger").css("height", "30px");
+        //});
+
 </script>
 }

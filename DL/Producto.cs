@@ -12,13 +12,14 @@ namespace DL
         public int? IdProveedor { get; set; }
         public int? IdDepartamento { get; set; }
         public string? Descripcion { get; set; }
-        public byte[]? Imagen { get; set; }
+        public string? Imagen { get; set; }
 
         public virtual Departamento? IdDepartamentoNavigation { get; set; }
         public virtual Proveedor? IdProveedorNavigation { get; set; }
 
+
         public string? NombreProveedor { set; get; }
-        public string NombreDepartamento { set; get; }
+        public string? NombreDepartamento { set; get; }
 
     }
 }

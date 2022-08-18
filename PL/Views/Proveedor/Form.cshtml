@@ -1,0 +1,65 @@
+﻿@model ML.Proveedor
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js" type="text/javascript"></script>
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Producto</h2>
+            <h5>Ingrese los datos del Proveedor:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6" style="display: none;">
+                        @Html.LabelFor(model => model.IdProveedor)
+                        @Html.TextBoxFor(model => model.IdProveedor, new { @class = " hidden form-control", @id = "txtIdProveedor" })
+                        @Html.ValidationMessageFor(model => model.IdProveedor)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Telefono)
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" })
+                        @Html.ValidationMessageFor(model => model.Telefono)
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Proveedor", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

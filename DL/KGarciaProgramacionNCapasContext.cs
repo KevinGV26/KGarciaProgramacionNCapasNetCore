@@ -168,6 +168,8 @@ namespace DL
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Imagen).IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -242,6 +244,8 @@ namespace DL
 
                 entity.Property(e => e.FechaNacimiento).HasColumnType("date");
 
+                entity.Property(e => e.Imagen).IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -256,6 +260,8 @@ namespace DL
                     .IsUnicode(false)
                     .HasColumnName("sexo")
                     .IsFixedLength();
+
+                entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.Property(e => e.Telefono)
                     .HasMaxLength(50)

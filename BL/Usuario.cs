@@ -19,7 +19,7 @@ namespace BL
 
                     var query = context.Database.ExecuteSqlRaw($"UsuarioAdd '{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}'" +
                         $",'{usuario.Rol.IdRol}',' {usuario.Password}','{usuario.Sexo}', '{usuario.Telefono}', '{usuario.Celular}','{usuario.FechaNacimiento}', '{usuario.Curp}'" +
-                        $",'{usuario.Imagen}', '{usuario.UserName}', '{usuario.Direccion.Calle}', '{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}','{usuario.Direccion.Colonia.IdColonia}'");
+                        $",'{usuario.Imagen}', '{usuario.UserName}','{usuario.Status}','{usuario.Direccion.Calle}', '{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}','{usuario.Direccion.Colonia.IdColonia}'");
 
                     if (query >= 1)
                     {
@@ -51,7 +51,7 @@ namespace BL
                 using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
                 {
                     var query = context.Database.ExecuteSqlRaw($"UsuarioUpdate '{usuario.IdUsuario}','{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}',{usuario.Rol.IdRol},'{usuario.Password}','{usuario.Sexo}'," +
-                        $"'{usuario.Telefono}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.Curp}','{usuario.Imagen}','{usuario.UserName}','{usuario.Direccion.IdDireccion}','{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
+                        $"'{usuario.Telefono}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.Curp}','{usuario.Imagen}','{usuario.UserName}','{usuario.Status}','{usuario.Direccion.IdDireccion}','{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
 
                     if (query >= 1)
                     {
@@ -81,7 +81,7 @@ namespace BL
             {
                 using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioDelete {usuario.IdUsuario}'");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioDelete {usuario.IdUsuario}");
 
                     if (query >= 1)
                     {
@@ -102,21 +102,23 @@ namespace BL
             }
             return result;
         }
-        public static ML.Result GetAll()
+        public static ML.Result GetAll(ML.Usuario usuario)
         {
             ML.Result result = new ML.Result();
             try
             {
                 using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
                 {
-                    var query = context.Usuarios.FromSqlRaw($"UsuarioGetAll").ToList();
+
+                    var query = context.Usuarios.FromSqlRaw($"UsuarioGetAll '{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}'");
+                    //var query = context.Usuarios.FromSqlRaw($"UsuarioGetAll").ToList();
                     result.Objects = new List<object>();
 
                     if (query != null)
                     {
                         foreach (var obj in query)
                         {
-                            ML.Usuario usuario = new ML.Usuario();
+                            //ML.Usuario usuario = new ML.Usuario();
 
                             usuario.IdUsuario = obj.IdUsuario;
                             usuario.Nombre = obj.Nombre;
@@ -132,7 +134,9 @@ namespace BL
                             usuario.Celular = obj.Celular;
                             usuario.FechaNacimiento = obj.FechaNacimiento.ToString();
                             usuario.Curp = obj.Curp;
+                            usuario.Imagen = obj.Imagen;
                             usuario.UserName = obj.UserName;
+                            usuario.Status = obj.Status;
 
                             usuario.Direccion = new ML.Direccion();
                             usuario.Direccion.IdDireccion = obj.IdDireccion;
@@ -210,7 +214,9 @@ namespace BL
                         usuario.Celular = query.Celular;
                         usuario.FechaNacimiento = query.FechaNacimiento.ToString();
                         usuario.Curp = query.Curp;
+                        usuario.Imagen = query.Imagen;
                         usuario.UserName = query.UserName;
+                        usuario.Status=query.Status;
                         //usuario.Rol = new ML.Rol();
                         //usuario.Rol.IdRol = query.IdRol.Value;
                         usuario.Direccion = new ML.Direccion();
@@ -236,9 +242,6 @@ namespace BL
                         usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
                         usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais = query.IdPais;
                         usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre = query.NombrePais;
-
-
-
                         result.Object = usuario;
 
                         result.Correct = true;

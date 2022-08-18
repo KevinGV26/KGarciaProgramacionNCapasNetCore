@@ -22,12 +22,12 @@ namespace DL
         public string? Celular { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public string? Curp { get; set; }
-        public byte[]? Imagen { get; set; }
+        public string? Imagen { get; set; }
         public string? UserName { get; set; }
+        public bool Status { get; set; }
 
         public virtual Rol? IdRolNavigation { get; set; }
         public virtual ICollection<Direccion> Direccions { get; set; }
-
 
         //ALias
         public string NombreRol { set; get; }

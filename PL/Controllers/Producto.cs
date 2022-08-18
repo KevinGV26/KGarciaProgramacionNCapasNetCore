@@ -27,7 +27,8 @@ namespace PL.Controllers
         }
         [HttpGet]
         public ActionResult Form(int? IdProducto)
-        { // instanciamos el modelo
+        { 
+            // instanciamos el modelo
             ML.Producto producto = new ML.Producto();
             //instanciamo el rol
 
@@ -74,17 +75,21 @@ namespace PL.Controllers
 
         }
 
-
         [HttpPost]
         public ActionResult Form(ML.Producto producto)
         {
+            IFormFile imagen = Request.Form.Files["fuImage"];
+            if (imagen != null)
+            {
+                byte[] ImagenByte = ConvertToBytes(imagen);
+                producto.Imagen = Convert.ToBase64String(ImagenByte);
+
+            }
 
             if (producto.IdProducto == 0)
             {//add
                 //instanciamos el metodo result y asignamos la capa del metodo agregar
                 ML.Result result = BL.Producto.Add(producto);
-
-
 
                 //Validamos
                 if (result.Correct)
@@ -107,6 +112,7 @@ namespace PL.Controllers
             return View("Modal");
         }
 
+        [HttpGet]
         public ActionResult Delete(int IdProducto)
         {
             //instaciamos el modelo
@@ -129,6 +135,15 @@ namespace PL.Controllers
             }
             //Regresamos la vista del modal
             return View("Modal");
+        }
+        public static byte[] ConvertToBytes(IFormFile imagen)
+        {
+            using var fileStream = imagen.OpenReadStream();
+
+            byte[] bytes = new byte[fileStream.Length];
+            fileStream.Read(bytes, 0, (int)fileStream.Length);
+
+            return bytes;
         }
     }
 }
