@@ -127,7 +127,7 @@ namespace BL
                             usuario.Email = obj.Email;
                             usuario.Rol = new ML.Rol();
                             usuario.Rol.IdRol = obj.IdRol.Value;
-                            usuario.Rol.Nombre = obj.NombreRol;
+                            usuario.Rol.Nombre = obj.Nombre;
                             usuario.Password = obj.Password;
                             usuario.Sexo = obj.Sexo;
                             usuario.Telefono = obj.Telefono;

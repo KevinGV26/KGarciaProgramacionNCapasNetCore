@@ -5,6 +5,11 @@ namespace DL
 {
     public partial class Producto
     {
+        public Producto()
+        {
+            VentaProductos = new HashSet<VentaProducto>();
+        }
+
         public int IdProducto { get; set; }
         public string Nombre { get; set; } = null!;
         public decimal PrecioUnitario { get; set; }
@@ -16,10 +21,12 @@ namespace DL
 
         public virtual Departamento? IdDepartamentoNavigation { get; set; }
         public virtual Proveedor? IdProveedorNavigation { get; set; }
-
+        public virtual ICollection<VentaProducto> VentaProductos { get; set; }
 
         public string? NombreProveedor { set; get; }
         public string? NombreDepartamento { set; get; }
+
+        
 
     }
 }

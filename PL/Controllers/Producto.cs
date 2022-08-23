@@ -7,20 +7,70 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
+
             //instanciamos la clase producto
             ML.Producto producto = new ML.Producto();
 
             //asignamos la capa con el metodo a la clase result
-            ML.Result result = BL.Producto.GetAll();
 
-            if (result.Correct)
+            producto.Departamento = new ML.Departamento();
+
+            producto.Departamento.Area = new ML.Area();
+
+            producto.Departamento.IdDepartamento = (producto.Departamento.IdDepartamento == 0) ? 0 : producto.Departamento.IdDepartamento;
+
+
+            ML.Result result = BL.Producto.GetAll(producto);
+
+            ML.Result ResultArea = BL.Area.GetAll();
+
+
+            if (result.Correct && ResultArea.Correct)
             {
                 producto.Productos = result.Objects;
+
+                producto.Departamento=new ML.Departamento();
+                producto.Departamento.Area = new ML.Area(); 
+                producto.Departamento.Area.Areas = ResultArea.Objects;
             }
             else
             {
                 result.Correct = false;
-                result.ErrorMessage = "ALgo fallo";
+                result.ErrorMessage = "Algo fallo";
+            }
+
+            return View(producto);
+        }
+
+        [HttpPost]
+        public ActionResult GetAll(ML.Producto producto)
+        {
+
+            producto.Departamento = new ML.Departamento();   
+
+            producto.Departamento.Area=new ML.Area();   
+
+            producto.Departamento.IdDepartamento = (producto.Departamento.IdDepartamento == 0) ? 0 : producto.Departamento.IdDepartamento;
+
+            //asignamos la capa con el metodo a la clase result
+
+            ML.Result result = BL.Producto.GetAll(producto);
+
+            ML.Result ResultArea = BL.Area.GetAll();
+
+
+            if (result.Correct && ResultArea.Correct)
+            {
+                producto.Productos = result.Objects;
+
+                producto.Departamento = new ML.Departamento();
+                producto.Departamento.Area = new ML.Area();
+                producto.Departamento.Area.Areas = ResultArea.Objects;
+            }
+            else
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Algo fallo";
             }
 
             return View(producto);
@@ -34,19 +84,21 @@ namespace PL.Controllers
 
 
             producto.Proveedor = new ML.Proveedor();
-            //producto.Departamento = new ML.Departamento();
+            producto.Departamento.Area = new ML.Area();
 
             ML.Result resultproveedor = BL.Proveedor.GetAll();
-            ML.Result resultdepartamento = BL.Departamento.GetAll();
-            if (resultproveedor.Correct && resultdepartamento.Correct)
+            ML.Result resultarea = BL.Area.GetAll();
+
+            if (resultproveedor.Correct && resultarea.Correct)
             {
                 if (IdProducto == null)
                 {//Add
 
                     producto.Proveedor = new ML.Proveedor();
                     producto.Proveedor.Proveedores = resultproveedor.Objects;
-                    producto.Departamento = new ML.Departamento();
-                    producto.Departamento.Departamentos = resultdepartamento.Objects;
+
+                    producto.Departamento.Area = new ML.Area();
+                    producto.Departamento.Area.Areas = resultarea.Objects;
                     return View(producto);
                 }
                 else //Update
@@ -59,9 +111,11 @@ namespace PL.Controllers
                         producto.Proveedor = new ML.Proveedor();
                         producto.Proveedor.Proveedores = resultproveedor.Objects;
 
-                        producto.Departamento = new ML.Departamento();
 
-                        producto.Departamento.Departamentos = resultdepartamento.Objects;
+                        producto.Departamento.Area = new ML.Area();
+
+                        producto.Departamento.Area.Areas = resultarea.Objects;
+
                         return View(producto);
 
                     }
@@ -136,6 +190,15 @@ namespace PL.Controllers
             //Regresamos la vista del modal
             return View("Modal");
         }
+
+
+        public JsonResult DepartamentoGetByIdArea(int IdArea)
+        {
+            ML.Result result = BL.Departamento.DepartamentoGetByIdArea(IdArea);
+
+            return Json(result.Objects);
+        }
+
         public static byte[] ConvertToBytes(IFormFile imagen)
         {
             using var fileStream = imagen.OpenReadStream();

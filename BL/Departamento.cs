@@ -9,26 +9,27 @@ namespace BL
 {
     public class Departamento
     {
-        public static ML.Result GetAll()
+        public static ML.Result DepartamentoGetByIdArea(int IdArea)
         {
             ML.Result result = new ML.Result();
-
             try
             {
                 using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
                 {
-                    var query = context.Departamentos.FromSqlRaw($"DepartamentoGetAll").ToList();
+                    var query = context.Departamentos.FromSqlRaw($"DepartamentoGetByIdArea {IdArea}").AsEnumerable().ToList();
+
                     result.Objects = new List<object>();
 
                     if (query != null)
                     {
                         foreach (var obj in query)
                         {
-                            ML.Departamento departamento  = new ML.Departamento();
+                            ML.Departamento departamento =new ML.Departamento();
 
-                            departamento.IdDepartamento = obj.IdDepartamento;
+                            departamento.IdDepartamento =obj.IdDepartamento;
                             departamento.Nombre = obj.Nombre;
-
+                            departamento.Area = new ML.Area();
+                            departamento.Area.IdArea = obj.IdArea.Value;
                             result.Objects.Add(departamento);
                         }
                         result.Correct = true;
@@ -46,5 +47,6 @@ namespace BL
             }
             return result;
         }
+
     }
 }

@@ -1,0 +1,75 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Venta Productos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un producto para editarlo o + para agregar...</h5>
+        <hr />
+    </div>
+</div>
+
+
+<div style="float:right;">
+@Html.ActionLink("+", "Form", "VentaProducto", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+<br />
+<table class="table table-bordered table-responsive">
+@*    <thead>
+        <tr>
+            <td>Editar</td>
+            <td class="hidden">IdProducto</td>
+            <td>Nombre</td>
+            <td>Precio unitario</td>
+            <td>Stock</td>
+            <td>IdProveedor</td>
+            <td>IdDepartamento</td>
+            <td>Descripcion</td>
+            <td>Imagen Producto</td>
+        </tr>
+    </thead>*@
+    <tbody>
+        <div class="container mb-5 ">
+            <div class="row">
+                @foreach(ML.Producto producto in Model.Productos)
+                {
+                    <div class="col-md-4">
+                        <div class="card" style="width": 18rem;">
+                            <img src="~/Images/proudcto-producto.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center ">
+                                <h5 class="card-title">Teclado inalambrico</h5>
+                                <p class="card-text">$820.</p>
+                                <a href="#" class="btn btn-success ">Agregar al carrito</a>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-4">
+                        <div class="card" style="width": 18rem;">
+                            <img src="~/Images/proudcto-producto.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center" >
+                                <h5 class="card-title">Teclado inalambrico</h5>
+                                <p class="card-text">$820.</p>
+                                <a href="#" class="btn btn-success">Agregar al carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width": 18rem;">
+                            <img src="~/Images/proudcto-producto.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center" >
+                                <h5 class="card-title">Teclado inalambrico</h5>
+                                <p class="card-text">$820.</p>
+                                <a href="#" class="btn btn-success">Agregar al carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />  
+                }
+            </div>
+        </div>
+    </tbody>
+</table>

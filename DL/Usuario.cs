@@ -8,6 +8,7 @@ namespace DL
         public Usuario()
         {
             Direccions = new HashSet<Direccion>();
+            Venta = new HashSet<Ventum>();
         }
 
         public int IdUsuario { get; set; }
@@ -28,9 +29,7 @@ namespace DL
 
         public virtual Rol? IdRolNavigation { get; set; }
         public virtual ICollection<Direccion> Direccions { get; set; }
-
-        //ALias
-        public string NombreRol { set; get; }
+        public virtual ICollection<Ventum> Venta { get; set; }
 
 
         //propiedades
@@ -50,5 +49,10 @@ namespace DL
 
 
         public string NombrePais { set; get; }
+
+
+
+
     }
 }
+

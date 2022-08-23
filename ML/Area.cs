@@ -11,5 +11,7 @@ namespace ML
         public int IdArea { get; set; }
 
         public string? Nombre { get; set; }
+
+        public List<object>? Areas { set; get; }
     }
 }

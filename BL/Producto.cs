@@ -90,7 +90,7 @@ namespace BL
             }
             return result;
         }
-        public static ML.Result GetAll()
+        public static ML.Result GetAll(ML.Producto producto)
         {
             ML.Result result = new ML.Result();
 
@@ -98,13 +98,15 @@ namespace BL
             {
                 using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
                 {
-                    var query = context.Productos.FromSqlRaw($"ProductoGetAll").ToList();
+                    //var query = context.Productos.FromSqlRaw($"ProductoGetAll").ToList();
+                    var query = context.Productos.FromSqlRaw($"ProductoGetAll {producto.Departamento.IdDepartamento}").ToList();
+
                     result.Objects = new List<object>();
                     if (query != null)
                     {
                         foreach (var obj in query)
                         {
-                            ML.Producto producto = new ML.Producto();
+                            //ML.Producto producto = new ML.Producto();
 
                             producto.IdProducto = obj.IdProducto;
                             producto.Nombre = obj.Nombre;
@@ -162,6 +164,7 @@ namespace BL
                         producto.Proveedor.IdProveedor = query.IdProveedor.Value;
                      
                         //Propiedad de navegación
+
                         producto.Departamento = new ML.Departamento();
                         producto.Departamento.IdDepartamento = query.IdDepartamento.Value;
                         producto.Departamento.Nombre = query.NombreDepartamento;
