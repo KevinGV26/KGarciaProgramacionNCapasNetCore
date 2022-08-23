@@ -46,13 +46,12 @@ namespace PL.Controllers
         public ActionResult GetAll(ML.Producto producto)
         {
 
-            producto.Departamento = new ML.Departamento();   
+            //producto.Departamento = new ML.Departamento();   
 
             producto.Departamento.Area=new ML.Area();   
 
             producto.Departamento.IdDepartamento = (producto.Departamento.IdDepartamento == 0) ? 0 : producto.Departamento.IdDepartamento;
 
-            //asignamos la capa con el metodo a la clase result
 
             ML.Result result = BL.Producto.GetAll(producto);
 
@@ -83,8 +82,8 @@ namespace PL.Controllers
             //instanciamo el rol
 
 
-            producto.Proveedor = new ML.Proveedor();
-            producto.Departamento.Area = new ML.Area();
+            //producto.Proveedor = new ML.Proveedor();
+            //producto.Departamento.Area = new ML.Area();
 
             ML.Result resultproveedor = BL.Proveedor.GetAll();
             ML.Result resultarea = BL.Area.GetAll();
@@ -96,7 +95,7 @@ namespace PL.Controllers
 
                     producto.Proveedor = new ML.Proveedor();
                     producto.Proveedor.Proveedores = resultproveedor.Objects;
-
+                    producto.Departamento=new ML.Departamento();
                     producto.Departamento.Area = new ML.Area();
                     producto.Departamento.Area.Areas = resultarea.Objects;
                     return View(producto);

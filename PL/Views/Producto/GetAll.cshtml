@@ -40,7 +40,7 @@
         }
         else
         {
-            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona una colonia", new { @class = "form-control", @id = "ddlDepartamento" })
+            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona un departamento", new { @class = "form-control", @id = "ddlDepartamento" })
             @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
         }
     </div>
