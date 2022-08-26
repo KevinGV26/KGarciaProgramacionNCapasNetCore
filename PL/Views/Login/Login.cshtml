@@ -2,62 +2,45 @@
 @*<h1>Login TEMPLATE</h1>*@
 
 <link href="~/css/LoginSheet.css" rel="stylesheet" type="text/css">
+
+@*    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                         <div class="box">
+                                @Html.LabelFor(model => model.UserName)
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" })   
+                                @Html.LabelFor(model => model.Password)
+                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })  
+                               <input type="submit" value="Guardar" class="btn btn-success" />
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
 <div class="container">
-    <div class="row"> 
-        <div class="col-md-6"> 
-            <div class="card">
-                <form onsubmit="event.preventDefault()" class="box">
-                    <h1>Login</h1> <p class="text-muted"> Por favor ingresa tu usuario y contraseña</p> 
+        <div class="row">
+            <div class="col-md-6"> 
+                <div class="card"> 
+                    <div class="box">
+                        <h1>Login</h1> 
+                        <p class="text-muted">Ingrese su usuario y contraseña</p> 
+                        @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.LabelFor(model => model.UserName,new{@class="text-muted"})
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" }) 
 
-                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
+                            @Html.LabelFor(model => model.Password,new{@class="text-muted"})
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })  
 
-                        <div class="col">
-                            @Html.LabelFor(model => model.UserName)
-                            <div class="col-md-4 col-12 col-sm-6">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-bounding-box"></i></span>
-                    
-                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" })
-                                    @Html.ValidationMessageFor(model => model.UserName)                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            @Html.LabelFor(model => model.Password)
-                            <div class="col-md-4 col-12 col-sm-6">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })
-                                    @Html.ValidationMessageFor(model => model.Password)                 
-                                </div>
-                            </div>
-                        </div>
+                           <input type="submit" value="Guardar" class="btn btn-success" />
+                        }
 
-                       <div class="col">
-                           <div class="col-md-3">
-                                <input type="submit" class="btn btn-success" value="Iniciar sesión"> 
-
-                           </div>
->                       </div>
-                    }
-@*                    <input type="text" name="" placeholder="Username"> 
-*@                    
-
-@*                    <input type="password" name="" placeholder="Password"> 
-*@                   
-
-@*                    @Html.TextBoxFor(Model=>Model.Password)
-                    <a class="forgot text-muted" href="#">Olvidaste tu contraseña</a> *@
-@*                    <div class="col-md-12"> 
-                        <ul class="social-network social-circle">
-                            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li> 
-                            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li> 
-                            <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
-                        </ul> 
-                    </div> *@
-                </form>
+                    </div>
+                </div> 
             </div> 
-        </div> 
-    </div>
+        </div>
 </div>
