@@ -264,6 +264,56 @@ namespace BL
             return result;
         }
 
+
+        public static ML.Result UserGetByName(string nombre)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
+                {
+                    var query = context.Usuarios.FromSqlRaw($"UsuarioGetByUserName  '{nombre}'").AsEnumerable().FirstOrDefault();
+
+                    result.Objects = new List<object>();
+
+                    if (query != null)
+                    {
+                        ML.Usuario usuario = new ML.Usuario();
+
+                        usuario.IdUsuario = query.IdUsuario;
+                        usuario.Nombre = query.Nombre;
+                        usuario.ApellidoPaterno = query.ApellidoPaterno;
+                        usuario.ApellidoMaterno = query.ApellidoMaterno;
+                        usuario.Email = query.Email;
+                        //instanciar la clase rol y poner value
+                        usuario.Rol = new ML.Rol();
+                        usuario.Rol.IdRol = query.IdRol.Value;
+                        usuario.Password = query.Password;
+                        usuario.Sexo = query.Sexo;
+                        usuario.Telefono = query.Telefono;
+                        usuario.Celular = query.Celular;
+                        usuario.FechaNacimiento = query.FechaNacimiento.ToString();
+                        usuario.Curp = query.Curp;
+                        usuario.Imagen = query.Imagen;
+                        usuario.UserName = query.UserName;
+                        usuario.Status = query.Status;
+
+                        result.Object = usuario;
+
+                        result.Correct = true;
+                    }
+
+                }
+            }
+            catch (Exception EX)
+            {
+                result.Correct = false;
+                result.ErrorMessage = EX.Message;
+            }
+            return result;
+
+        }
     }
 }
 

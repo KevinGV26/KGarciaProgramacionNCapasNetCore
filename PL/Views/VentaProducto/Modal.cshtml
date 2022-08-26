@@ -15,10 +15,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5>@ViewBag.Mensaje</h5>
+                <h5>@ViewBag.Message</h5>
             </div>
-            <div class="modal-footer">
-                @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="modal-footer">
+                        @Html.ActionLink("Ver carrito", "ResultCompra", "VentaProducto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="modal-footer">
+                        @Html.ActionLink("Seguir comprando", "GetAll", "VentaProducto", htmlAttributes: new { @class = "btn btn-success" })
+                    </div>
+
+                </div>
+
+
             </div>
 
         </div>

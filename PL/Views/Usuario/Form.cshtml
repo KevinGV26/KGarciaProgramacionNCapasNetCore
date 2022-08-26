@@ -35,7 +35,6 @@
         <div class="col-md-12">
             @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-
                 <div class="hidden">
                     <div class="col-md-4 col-12 col-sm-6" style="display: none;">
                         @Html.LabelFor(model => model.IdUsuario)
@@ -44,49 +43,63 @@
 
                     </div>
                 </div>
+
+
                 <div class="col">
+                    @Html.LabelFor(model => model.Nombre)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Nombre)
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre",onkeypress="return SoloLetras(event, 'lblErrorNombre')" })
-                        @Html.ValidationMessageFor(model => model.Nombre)
-                        <label id="lblErrorNombre"></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre",onkeypress="return SoloLetras(event, 'lblErrorNombre')" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                            <label id="lblErrorNombre"></label>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="col">
+                    @Html.LabelFor(model => model.ApellidoPaterno)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.ApellidoPaterno)
-                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoPaterno')" })
-                        @Html.ValidationMessageFor(model => model.ApellidoPaterno)
-                        <label id="lblErrorApellidoPaterno"></label>
-
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoPaterno')" })
+                            @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                            <label id="lblErrorApellidoPaterno"></label>
+                       </div>
                     </div>
                 </div>
 
                 <div class="col">
+                    @Html.LabelFor(model => model.ApellidoMaterno)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.ApellidoMaterno)
-                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoMaterno')" })
-                        @Html.ValidationMessageFor(model => model.ApellidoMaterno)
-                        <label id="lblErrorApellidoMaterno"></label>
-
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno",onkeypress="return SoloLetras(event,'lblErrorApellidoMaterno')" })
+                            @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                            <label id="lblErrorApellidoMaterno"></label>
+                       </div>
                     </div>
                 </div>
 
                 <div class="col">
+                    @Html.LabelFor(model => model.Email)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Email)
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail"})
-                        @Html.ValidationMessageFor(model => model.Email)
-                        <label id="lblErrorEmail"></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-check-fill"></i></span>
+
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail"})
+                            @Html.ValidationMessageFor(model => model.Email)
+                            <label id="lblErrorEmail"></label>
+                        </div>
+
                    </div>
                 </div>
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         <label>Confirmar Email</label>
                         <div class="input-group">
-                            <span class="input-group-addon"></span>
+                            <span class="input-group-addon"><i class="bi bi-envelope-check-fill"></i></span>
                             <input class="form-control" type="text" id="ConfirmarEmail" onblur="return ValidarEmailConfirmacion(event,'lblErrorEmailConfirmation')"/>
                         </div>
                         <label id="lblErrorEmailConfirmation"></label>
@@ -94,37 +107,50 @@
                 </div>
 
                 <div class="col">
+                    @Html.LabelFor(model => model.Rol.IdRol)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Rol.IdRol)
-                        @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona el rol correspondiente", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Rol.IdRol)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-people-fill"></i></span>
+
+
+                            @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona el rol correspondiente", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Rol.IdRol) 
+                        
+                        </div>
                     </div>
                 </div>
 
                 <div class="col">
+                    @Html.LabelFor(model => model.Password)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Password)
-                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })
-                        @Html.ValidationMessageFor(model => model.Password)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })
+                            @Html.ValidationMessageFor(model => model.Password)                 
+                        </div>
                     </div>
                 </div>
                 <div class="col">
+                    <label>Confirmar Password</label>
                     <div class="col-md-4 col-12 col-sm-6">
-                        <label>Confirmar Password</label>
                         <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
                             <input class="form-control" type="text" id="ConfirmarPassword" onblur="return ValidarPasswordConfirmacion(event,'lblErrorPasswordConfirmation')"/>
                         </div>
                         <label id="lblErrorPasswordConfirmation"></label>
                    </div>
                 </div>
+                    @Html.LabelFor(model => model.Sexo)
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.Sexo)
-                        @Html.RadioButtonFor(model => model.Sexo, "M", new { @id = "rbtnSexoM"})
                         @Html.Label("Masculino")
-                        @Html.RadioButtonFor(model => model.Sexo, "F", new { @id = "rbtnSexoF"})
-                        @Html.Label("Femenino")
-                        @Html.ValidationMessageFor(model => model.Sexo)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-gender-ambiguous"></i></span>
+                            @Html.RadioButtonFor(model => model.Sexo, "M", new { @id = "rbtnSexoM"})
+                            @Html.RadioButtonFor(model => model.Sexo, "F", new { @id = "rbtnSexoF"})
+                            @Html.Label("Femenino")
+                            @Html.ValidationMessageFor(model => model.Sexo)
+                        </div>
                     </div>
                 </div>
 @*                <div class="col">
@@ -135,35 +161,47 @@
                     </div>
                 </div>*@
                 <div class="col">
+                    @Html.LabelFor(model => model.Telefono)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Telefono)
-                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono",onkeypress="return SoloNumeros(event,'lblErrorTelefono')" })
-                        @Html.ValidationMessageFor(model => model.Telefono)
-                        <label id="lblErrorTelefono"></label>
+                         <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone"></i></span>
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono",onkeypress="return SoloNumeros(event,'lblErrorTelefono')" })
+                            @Html.ValidationMessageFor(model => model.Telefono)
+                            <label id="lblErrorTelefono"></label>
+                    
+                        </div>
                     </div>
                 </div>
                 <div class="col">
+                      @Html.LabelFor(model => model.Celular)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Celular)
-                        @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @id = "txtCelular",onkeypress="return SoloNumeros(event,'lblErrorCelular')" })
-                        @Html.ValidationMessageFor(model => model.Celular)
-                        <label id="lblErrorCelular"></label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.FechaNacimiento)
-                        @Html.TextBoxFor(model => model.FechaNacimiento, new {@class = "form-control", @id = "txtFechaNacimiento" })
-                        @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                        <div class="input-group mb-3">
+                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-phone"></i></span>
+                            @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @id = "txtCelular",onkeypress="return SoloNumeros(event,'lblErrorCelular')" })
+                            @Html.ValidationMessageFor(model => model.Celular)
+                            <label id="lblErrorCelular"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="col">
+                      @Html.LabelFor(model => model.FechaNacimiento)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Curp)
-                        @Html.TextBoxFor(model => model.Curp, new { @class = "form-control", @id = "txtCurp",onblur="return ValidarCurp(event,'lblErrorCurp')" })
-                        @Html.ValidationMessageFor(model => model.Curp)
-                        <label id="lblErrorCurp"></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar-date"></i></span>
+                            @Html.TextBoxFor(model => model.FechaNacimiento, new {@class = "form-control", @id = "txtFechaNacimiento" })
+                            @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.Curp)
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-heading"></i></span>
+                                @Html.TextBoxFor(model => model.Curp, new { @class = "form-control", @id = "txtCurp",onblur="return ValidarCurp(event,'lblErrorCurp')" })
+                                @Html.ValidationMessageFor(model => model.Curp)
+                            <label id="lblErrorCurp"></label>                    
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -184,87 +222,127 @@
                     }
                 </div>
                     @Html.HiddenFor(model => model.Imagen)
+
                 <div class="col">
+                    @Html.LabelFor(model => model.UserName)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.UserName)
-                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" })
-                        @Html.ValidationMessageFor(model => model.UserName)
+                         <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-bounding-box"></i></span>
+                    
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUsername" })
+                            @Html.ValidationMessageFor(model => model.UserName)                    
+                        </div>
                     </div>
                 </div>
                 <div class="col">
+                    @Html.LabelFor(model => model.Direccion.Calle)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Direccion.Calle)
-                        @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @id = "txtCalle" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Calle)
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-signpost-split"></i></span>
+                            @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @id = "txtCalle" })
+                            @Html.ValidationMessageFor(model => model.Direccion.Calle)
+
+                        </div>
                     </div>
                 </div>
                 <div class="col">
+                    @Html.LabelFor(model => model.Direccion.NumeroInterior)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Direccion.NumeroInterior)
-                        @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @id = "txtNumeroInterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroInterior')"})
-                        @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior)
-                         <label id="lblErrorNumeroInterior"></label>
+                       <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-2-circle-fill"></i></span>
+                            @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @id = "txtNumeroInterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroInterior')"})
+                            @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior)
+                             <label id="lblErrorNumeroInterior"></label>
+                       </div>
                     </div>
                 </div>
                 <div class="col">
+                     @Html.LabelFor(model => model.Direccion.NumeroExterior)
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Direccion.NumeroExterior)
-                        @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @id = "txtNumeroExterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroExterior')" })
-                        @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
-                        <label id="lblErrorNumeroExterior"></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-2-circle-fill"></i></span>
+                            @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @id = "txtNumeroExterior",onkeypress="return SoloNumeros(event,'lblErrorNumeroExterior')" })
+                            @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
+                            <label id="lblErrorNumeroExterior"></label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                
+                <div class="col">
                     @Html.LabelFor(model => model.Direccion.Colonia.Municipio.Estado.Pais)
-                    @if (Model.Direccion.Colonia.Municipio.Estado.Pais.Paises == null)
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Pais", new { @class = "form-control", @id = "ddlPais" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
-                    }
-                    else
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Pais.Paises, "IdPais", "Nombre"), "Selecciona un Pais", new { @class = "form-control", @id = "ddlPais" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
-                    }
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                            @if (Model.Direccion.Colonia.Municipio.Estado.Pais.Paises == null)
+                            {
+                                @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Pais", new { @class = "form-control", @id = "ddlPais" })
+                                @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Pais.Paises, "IdPais", "Nombre"), "Selecciona un Pais", new { @class = "form-control", @id = "ddlPais" })
+                                @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
+                            }                
+                         </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
+
+
+
+                <div class="col">
                     @Html.LabelFor(model => model.Direccion.Colonia.Municipio.Estado)
-                    @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Estado", new { @class = "form-control", @id = "ddlEstado" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
-                    }
-                    else
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Selecciona un Estado", new { @class = "form-control", @id = "ddlEstado" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
-                    }
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                                @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Estado", new { @class = "form-control", @id = "ddlEstado" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Selecciona un Estado", new { @class = "form-control", @id = "ddlEstado" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
+                                }
+                        </div>                            
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col">
                     @Html.LabelFor(model => model.Direccion.Colonia.Municipio)
-                    @if (Model.Direccion.Colonia.Municipio.Municipios == null)
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Municipio", new { @class = "form-control", @id = "ddlMunicipio" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.IdMunicipio)
-                    }
-                    else
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Selecciona un Municipio", new { @class = "form-control", @id = "ddlMunicipio" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.IdMunicipio)
-                    }
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                                @if (Model.Direccion.Colonia.Municipio.Municipios == null)
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Municipio", new { @class = "form-control", @id = "ddlMunicipio" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.IdMunicipio)
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Selecciona un Municipio", new { @class = "form-control", @id = "ddlMunicipio" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.IdMunicipio)
+                                }
+
+                        </div>                
+                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col">
                     @Html.LabelFor(model => model.Direccion.Colonia)
-                    @if (Model.Direccion.Colonia.Colonias == null)
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(string.Empty, "Value", "Text"), "Selecciona una Colonia", new { @class = "form-control", @id = "ddlColonia" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
-                    }
-                    else
-                    {
-                        @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Selecciona una colonia", new { @class = "form-control", @id = "ddlColonia" })
-                        @Html.ValidationMessageFor(model => model.Direccion.Colonia.IdColonia)
-                    }
+                    <div class="col-md-4 col-12 col-sm-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                                @if (Model.Direccion.Colonia.Colonias == null)
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(string.Empty, "Value", "Text"), "Selecciona una Colonia", new { @class = "form-control", @id = "ddlColonia" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado)
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Selecciona una colonia", new { @class = "form-control", @id = "ddlColonia" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.Colonia.IdColonia)
+                                }
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     <div class="col-md-3">

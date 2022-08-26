@@ -26,6 +26,8 @@ namespace ML
 
         public List<object>? Productos { set; get; }
 
+        public int cantidad { set; get; }
+
 
     }
 }

@@ -35,15 +35,15 @@ namespace DL
         //propiedades
 
         public int IdDireccion { set; get; }
-        public string Calle { set; get; }
-        public string NumeroInterior { set; get; }
-        public string NumeroExterior { set; get; }
+        public string? Calle { set; get; }
+        public string? NumeroInterior { set; get; }
+        public string? NumeroExterior { set; get; }
         public int IdColonia { set; get; }
-        public string NombreColonia { set; get; }
+        public string? NombreColonia { set; get; }
         public int IdMunicipio { set; get; }
-        public string NombreMunicipio { set; get; }
+        public string? NombreMunicipio { set; get; }
         public int IdEstado { set; get; }
-        public string NombreEstado { set; get; }
+        public string? NombreEstado { set; get; }
 
         public int IdPais { set; get; }
 

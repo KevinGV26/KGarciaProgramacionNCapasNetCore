@@ -19,5 +19,6 @@ namespace ML
 
         public List<object>? VentaProductos { set; get; }
 
+        public int Total { get; set; }
     }
 }

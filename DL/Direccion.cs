@@ -6,7 +6,7 @@ namespace DL
     public partial class Direccion
     {
         public int IdDireccion { get; set; }
-        public string Calle { get; set; } = null!;
+        public string? Calle { get; set; } = null!;
         public string? NumeroInterior { get; set; }
         public string NumeroExterior { get; set; } = null!;
         public int? IdColonia { get; set; }

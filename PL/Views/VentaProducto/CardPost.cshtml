@@ -1,0 +1,80 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js" type="text/javascript"></script>
+
+<h2>Producto</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un producto para agregarlo al carrito</h5>
+        <hr />
+    </div>
+</div>
+@using(Html.BeginForm("GetAll","VentaProducto",FormMethod.Post,new { enctype = "multipart/form-data"}))
+{
+    
+
+    <div class="col-md-3">
+        @Html.LabelFor(model => model.Departamento.Area)
+        @if (Model.Departamento.Area.Areas == null)
+        {
+            @Html.DropDownListFor(model => model.Departamento.Area.IdArea, new SelectList(string.Empty, "Value", "Text"), "Selecciona una area", new { @class = "form-control", @id = "ddlArea" })
+            @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
+        }
+        else
+        {
+            @Html.DropDownListFor(model => model.Departamento.Area.IdArea, new SelectList(Model.Departamento.Area.Areas, "IdArea", "Nombre"), "Selecciona una Area", new { @class = "form-control", @id = "ddlArea" })
+            @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(model => model.Departamento)
+        @if (Model.Departamento.Departamentos== null)
+        {
+            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(string.Empty, "Value", "Text"), "Selecciona un departamento", new { @class = "form-control", @id = "ddlDepartamento" })
+            @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+        }
+        else
+        {
+            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona un departamento", new { @class = "form-control", @id = "ddlDepartamento" })
+            @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+        }
+    </div>
+
+
+    <div class="col">
+        <div class="col-md-3">
+            <input type="submit" value="Buscar"  class="btn btn-success"/>
+        </div>
+    </div>
+
+
+}
+<div style="float:right;">
+@Html.ActionLink("+", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+<br />
+<table class="table table-bordered table-responsive">
+    <tbody>
+        @foreach(ML.Producto producto in Model.Productos)
+            {
+                <tr>
+                    <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form","Producto",new {IdProducto =producto.IdProducto})"> </a></td>
+                    <td class="hidden">@producto.IdProducto</td>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.PrecioUnitario</td>
+                    <td>@producto.Stock</td>
+                    @*propiedades de navegacion*@
+                    <td>@producto.Proveedor.IdProveedor</td>
+                    <td>@producto.Departamento.IdDepartamento</td>
+                    <td>@producto.Descripcion</td>
+                    <td> <img id="Img" src="data:image/*;base64,@producto.Imagen" style="width:auto ; height:100px" /></td>
+                    <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto= producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este producto?');"></a></td>
+                </tr>
+            }
+    </tbody>
+</table>

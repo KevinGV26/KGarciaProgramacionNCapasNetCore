@@ -106,20 +106,20 @@ namespace BL
                     {
                         foreach (var obj in query)
                         {
-                            //ML.Producto producto = new ML.Producto();
+                            ML.Producto objProducto = new ML.Producto();
 
-                            producto.IdProducto = obj.IdProducto;
-                            producto.Nombre = obj.Nombre;
-                            producto.PrecioUnitario = obj.PrecioUnitario;
-                            producto.Stock = obj.Stock;
-                            producto.Proveedor = new ML.Proveedor();
-                            producto.Proveedor.IdProveedor = obj.IdProveedor.Value;
-                            producto.Departamento = new ML.Departamento();
-                            producto.Departamento.IdDepartamento = obj.IdDepartamento.Value;
-                            producto.Descripcion = obj.Descripcion;
-                            producto.Imagen = obj.Imagen;
+                            objProducto.IdProducto = obj.IdProducto;
+                            objProducto.Nombre = obj.Nombre;
+                            objProducto.PrecioUnitario = obj.PrecioUnitario;
+                            objProducto.Stock = obj.Stock;
+                            objProducto.Proveedor = new ML.Proveedor();
+                            objProducto.Proveedor.IdProveedor = obj.IdProveedor.Value;
+                            objProducto.Departamento = new ML.Departamento();
+                            objProducto.Departamento.IdDepartamento = obj.IdDepartamento.Value;
+                            objProducto.Descripcion = obj.Descripcion;
+                            objProducto.Imagen = obj.Imagen;
                             //guardarlos en la lista
-                            result.Objects.Add(producto);
+                            result.Objects.Add(objProducto);
                         }
                         result.Correct = true;
                     }

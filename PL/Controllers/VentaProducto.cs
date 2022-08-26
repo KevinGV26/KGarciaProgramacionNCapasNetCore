@@ -7,7 +7,7 @@ namespace PL.Controllers
 {
     public class VentaProducto : Controller
     {
-        [HttpGet]
+        //[HttpGet]
         public ActionResult GetAll()
         {
 
@@ -50,7 +50,7 @@ namespace PL.Controllers
         {
             producto.Nombre = (producto.Nombre == null) ? "" : producto.Nombre;
             //materia.Semestre.IdSemestre = (materia.Semestre.IdSemestre == null) ? "" : empleado.ApellidoPaterno;
-            //producto.Departamento.Area = producto.Departamento.Area == 0 ? 0 : producto.Departamento.Area;
+            producto.Departamento.IdDepartamento = (producto.Departamento.IdDepartamento == 0) ? 0 : producto.Departamento.IdDepartamento;
 
             ML.Result result = BL.Producto.GetAll(producto);
             producto.Productos = result.Objects;
@@ -63,10 +63,10 @@ namespace PL.Controllers
         }
 
 
-
+        [HttpPost]
         public ActionResult Cart()
         {
-            return View();
+            return View(CardPost);
         }
 
         [HttpGet]
@@ -82,9 +82,9 @@ namespace PL.Controllers
 
                 ventaProducto.VentaProductos.Add(producto);
 
-                HttpContext.Session.SetString("Prodcuto",Newtonsoft.Json.JsonConvert.SerializeObject(ventaProducto.VentaProductos));   
+                HttpContext.Session.SetString("Producto",Newtonsoft.Json.JsonConvert.SerializeObject(ventaProducto.VentaProductos));   
 
-                var session=HttpContext.Session.GetString("Producto");
+                //var session=HttpContext.Session.GetString("Producto");
             }
             else
             {
@@ -100,7 +100,9 @@ namespace PL.Controllers
                 {
                     if(producto.IdProducto == venta.IdProducto)
                     {
-                        venta.PrecioUnitario=producto.PrecioUnitario+1;   
+                        //producto.PrecioUnitario=producto.PrecioUnitario+1;   
+
+                       
                     }
                     else
                     {
@@ -115,7 +117,7 @@ namespace PL.Controllers
             if(HttpContext.Session.GetString("Producto")!=null)
             {
                 ViewBag.Message = "El producto se ha agregado correctamente al carrito";
-                return PartialView("Modal");
+                return View("Modal");
             }
             else
             {
@@ -132,6 +134,7 @@ namespace PL.Controllers
 
             if (HttpContext.Session.GetString("Producto") == null)
             {
+                //Vista vacia
                 return View();
 
             }

@@ -11,7 +11,7 @@ namespace DL
         }
 
         public int IdColonia { get; set; }
-        public string Nombre { get; set; } = null!;
+        public string? Nombre { get; set; } = null!;
         public int? IdMunicipio { get; set; }
 
         public virtual Municipio? IdMunicipioNavigation { get; set; }

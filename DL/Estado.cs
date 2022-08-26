@@ -11,7 +11,7 @@ namespace DL
         }
 
         public int IdEstado { get; set; }
-        public string Nombre { get; set; } = null!;
+        public string? Nombre { get; set; } = null!;
         public int? IdPais { get; set; }
 
         public virtual Pai? IdPaisNavigation { get; set; }
