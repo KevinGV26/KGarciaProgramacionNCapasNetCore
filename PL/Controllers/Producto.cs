@@ -82,7 +82,7 @@ namespace PL.Controllers
             //instanciamo el rol
 
 
-            //producto.Proveedor = new ML.Proveedor();
+            producto.Proveedor = new ML.Proveedor();
             //producto.Departamento.Area = new ML.Area();
 
             ML.Result resultproveedor = BL.Proveedor.GetAll();
