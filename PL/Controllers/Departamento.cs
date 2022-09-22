@@ -28,20 +28,54 @@ namespace PL.Controllers
 
         [HttpGet]
 
+        [HttpGet]
         public ActionResult Form(int? IdDepartamento)
         {
+
             ML.Departamento departamento = new ML.Departamento();
 
-            if(IdDepartamento == null)
+            departamento.Area = new ML.Area();
+
+            ML.Result resultArea = BL.Area.GetAll();
+
+
+            if (resultArea.Correct)
             {
-                return View(departamento);
+                if (IdDepartamento == null)
+                {
+                    departamento.Area = new ML.Area();
+                    departamento.Area.Areas = resultArea.Objects;
+                    return View(departamento);
+                }
+                else
+                {
+                    ML.Result result = BL.Departamento.DepartamentoGetById(IdDepartamento.Value);
+
+                    if (result.Correct)
+                    {
+                        departamento = (ML.Departamento)result.Object;
+
+                        return View(departamento);
+                    }
+                    else
+                    {
+                        result.Correct = false;
+
+                        ViewBag.message = "algo fallo";
+                    }
+                }
+
             }
+            return View("Modal");
+
+
         }
+
 
         [HttpPost]
         public ActionResult Form(ML.Departamento departamento)
         {
-            if(departamento.IdDepartamento == 0)
+            if (departamento.IdDepartamento == 0)
             {
                 ML.Result result = BL.Departamento.DepartamentoAdd(departamento);
 
@@ -53,7 +87,14 @@ namespace PL.Controllers
                 {
                     ViewBag.Mensaje = "error al insertar" + result.ErrorMessage;
                 }
+                return View("Modal");
+            }
+            else
+            {
 
+                ML.Result result = BL.Departamento.DepartamentoUpdate(departamento);
+
+                departamento = (ML.Departamento)result.Object;
             }
             return View("Modal");
         }

@@ -36,6 +36,83 @@ namespace BL
             }
             return result;
         }
+        
+        public static ML.Result DepartamentoGetById(int IdDepartamento)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.KGarciaProgramacionNCapasContext context = new DL.KGarciaProgramacionNCapasContext())
+                {
+                    var query = context.Departamentos.FromSqlRaw($"DepartamentoGetById {IdDepartamento}").AsEnumerable().FirstOrDefault();
+
+                    result.Object = new List<object>();
+
+                    if (query != null)
+                    {
+                        ML.Departamento departamento = new ML.Departamento();
+
+                        departamento.IdDepartamento = query.IdDepartamento;
+
+                        departamento.Nombre = query.Nombre;
+
+                        departamento.Area = new ML.Area();
+
+                        departamento.Area.IdArea = query.IdArea.Value;
+
+
+                        result.Object = departamento;
+
+                        result.Correct = true;
+
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Ocurrio un error";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+        
+
+        public static ML.Result DepartamentoUpdate(ML.Departamento departamento)
+        {
+            ML.Result result=new ML.Result();
+            try
+            {
+                using(DL.KGarciaProgramacionNCapasContext context=new DL.KGarciaProgramacionNCapasContext())
+                {
+                    var query = context.Database.ExecuteSqlRaw($"DepartamentoUpdate {departamento.IdDepartamento},'{departamento.Nombre}',{departamento.Area.IdArea}");
+
+
+                    if(query>=1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                result.Correct = false;
+
+                result.ErrorMessage = ex.Message;
+
+            }
+            return result;
+        }
         public static ML.Result DepartamentoGetAll()
         {
             ML.Result result = new ML.Result();
