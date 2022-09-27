@@ -26,6 +26,15 @@
             @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
 
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6" style="display: none;">
+                        @Html.LabelFor(model => model.IdProducto)
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = " hidden form-control", @id = "txtIdUsuario" })
+                        @Html.ValidationMessageFor(model => model.IdProducto)
+
+                    </div>
+                </div>
+
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Nombre)

@@ -80,15 +80,14 @@ namespace PL.Controllers
             // instanciamos el modelo
             ML.Producto producto = new ML.Producto();
             //instanciamo el rol
-
-
             producto.Proveedor = new ML.Proveedor();
+            producto.Departamento = new ML.Departamento();
             //producto.Departamento.Area = new ML.Area();
 
             ML.Result resultproveedor = BL.Proveedor.GetAll();
-            ML.Result resultarea = BL.Area.GetAll();
+            ML.Result resultdepartamento = BL.Departamento.DepartamentoGetAll();
 
-            if (resultproveedor.Correct && resultarea.Correct)
+            if (resultproveedor.Correct && resultdepartamento.Correct)
             {
                 if (IdProducto == null)
                 {//Add
@@ -97,7 +96,7 @@ namespace PL.Controllers
                     producto.Proveedor.Proveedores = resultproveedor.Objects;
                     producto.Departamento=new ML.Departamento();
                     producto.Departamento.Area = new ML.Area();
-                    producto.Departamento.Area.Areas = resultarea.Objects;
+                    producto.Departamento.Departamentos = resultdepartamento.Objects;
                     return View(producto);
                 }
                 else //Update
@@ -111,9 +110,9 @@ namespace PL.Controllers
                         producto.Proveedor.Proveedores = resultproveedor.Objects;
 
 
-                        producto.Departamento.Area = new ML.Area();
+                        producto.Departamento = new ML.Departamento();
 
-                        producto.Departamento.Area.Areas = resultarea.Objects;
+                        producto.Departamento.Departamentos = resultdepartamento.Objects;
 
                         return View(producto);
 
@@ -161,6 +160,16 @@ namespace PL.Controllers
             else //Update
             {
                 ML.Result result = BL.Producto.Update(producto);
+
+                if (result.Correct)
+                {
+                    ViewBag.Mensaje = "Registro actalizado correctamente";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Error al actualizar el registro";
+                }
+                return View("Modal");
             }
             return View("Modal");
         }
